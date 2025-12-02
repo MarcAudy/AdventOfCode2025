@@ -1,0 +1,35 @@
+# Build outputs
+bin/
+obj/
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# .NET artifacts
+*.dll
+*.exe
+*.pdb
+artifacts/
+project.lock.json
+
+# User-specific
+*.user
+*.userdata
+*.suo
+
+# Logs & temp
+*.log
+*.tmp
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# NuGet
+*.nupkg
+.nuget/
+
+# Rider / IDE leftovers
+.idea/
+*.sln.iml
