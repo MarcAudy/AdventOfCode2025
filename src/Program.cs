@@ -1,1 +1,1 @@
-﻿day1.run();
+﻿day2.run();

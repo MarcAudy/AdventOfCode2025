@@ -12,7 +12,7 @@ class day1
     {
         int dial = 50;
         int zeroes = 0;
-        FileProcessor.Process(fileName, line =>
+        FileProcessor.ProcessLines(fileName, line =>
         {
             int movement = int.Parse(line[1..]);
             if (line[0] == 'L')
@@ -40,7 +40,7 @@ class day1
     {
         int dial = 50;
         int zeroes = 0;
-        FileProcessor.Process(fileName, line =>
+        FileProcessor.ProcessLines(fileName, line =>
         {
             int movement = int.Parse(line[1..]);
             zeroes += movement / 100;

@@ -1,8 +1,16 @@
 class FileProcessor
 {
-    public static void Process(string fileName, Action<string> lineAction)
+    public static void ProcessLines(string fileName, Action<string> lineAction)
     {
         foreach (string line in File.ReadAllLines($"../../../../input/{fileName}.txt"))
+        {
+            lineAction(line);
+        }
+    }
+
+    public static void ProcessSegments(string fileName, char separator, Action<string> lineAction)
+    {
+        foreach (string line in File.ReadAllText($"../../../../input/{fileName}.txt").Split(separator))
         {
             lineAction(line);
         }
