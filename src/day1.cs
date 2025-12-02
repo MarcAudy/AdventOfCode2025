@@ -2,64 +2,39 @@ class day1
 {
     public static void run()
     {
-        Console.WriteLine($"Day1 Part1 Example: {part1("day1_example")}");
-        Console.WriteLine($"Day1 Part1: {part1("day1_input")}");
-        Console.WriteLine($"Day1 Part2 Example: {part2("day1_example")}");
-        Console.WriteLine($"Day1 Part2: {part2("day1_input")}");
+        var exampleResult = evaluate("day1_example");
+        var result = evaluate("day1_input");
+        Console.WriteLine($"Day1 Part1 Example: {exampleResult.Item1}");
+        Console.WriteLine($"Day1 Part1: {result.Item1}");
+        Console.WriteLine($"Day1 Part2 Example: {exampleResult.Item2}");
+        Console.WriteLine($"Day1 Part2: {result.Item2}");
     }
 
-    private static int part1(string fileName)
+    private static (int, int) evaluate(string fileName)
     {
         int dial = 50;
-        int zeroes = 0;
+        int part1_zeroes = 0;
+        int part2_zeroes = 0;
         FileProcessor.ProcessLines(fileName, line =>
         {
             int movement = int.Parse(line[1..]);
-            if (line[0] == 'L')
-            {
-                dial -= movement;
-                while (dial < 0)
-                {
-                    dial += 100;
-                }
-            }
-            else
-            {
-                dial += movement;
-                dial %= 100;
-            }
-            if (dial == 0)
-            {
-                zeroes++;
-            }
-        });
-        return zeroes;
-    }
-
-    private static int part2(string fileName)
-    {
-        int dial = 50;
-        int zeroes = 0;
-        FileProcessor.ProcessLines(fileName, line =>
-        {
-            int movement = int.Parse(line[1..]);
-            zeroes += movement / 100;
+            part2_zeroes += movement / 100;
             movement %= 100;
             if (line[0] == 'L')
             {
                 if (dial == 0)
                 {
-                    zeroes--;
+                    part2_zeroes--;
                 }
                 dial -= movement;
                 if (dial == 0)
                 {
-                    zeroes++;
+                    part2_zeroes++;
                 }
                 if (dial < 0)
                 {
                     dial += 100;
-                    zeroes++;
+                    part2_zeroes++;
                 }
             }
             else
@@ -68,10 +43,14 @@ class day1
                 if (dial >= 100)
                 {
                     dial -= 100;
-                    zeroes++;
+                    part2_zeroes++;
                 }
             }
+            if (dial == 0)
+            {
+                part1_zeroes++;
+            }
         });
-        return zeroes;
+        return (part1_zeroes, part2_zeroes);
     }    
 }
