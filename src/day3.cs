@@ -8,32 +8,36 @@ class day3
         var result = evaluate("day3_input");
         Console.WriteLine($"Day3 Part1 Example: {exampleResult.Item1}");
         Console.WriteLine($"Day3 Part1: {result.Item1}");
-        //Console.WriteLine($"Day3 Part2 Example: {exampleResult.Item2}");
-        //Console.WriteLine($"Day3 Part2: {result.Item2}");
+        Console.WriteLine($"Day3 Part2 Example: {exampleResult.Item2}");
+        Console.WriteLine($"Day3 Part2: {result.Item2}");
     }
 
-    private static (int, int) evaluate(string fileName)
+    private static (ulong, ulong) evaluate(string fileName)
     {
-        int totalJoltage = 0;
+        ulong part1_totalJoltage = 0;
+        ulong part2_totalJoltage = 0;
         FileProcessor.ProcessLines(fileName, line =>
         {
-            List<int> batteries = line.Select(ch => (int)char.GetNumericValue(ch)).ToList();
-            int firstDigitIndex = 0;
-            int secondDigitIndex = 1;
-            for (int index = 1; index < batteries.Count(); index++)
+            ulong FindLargestJoltage(List<ulong> batteries, int digits)
             {
-                if (index < batteries.Count() - 1 && batteries[index] > batteries[firstDigitIndex])
+                if (digits == 0) return 0;
+
+                int digitIndex = 0;
+                for (int index = 1; index < batteries.Count() - digits + 1; index++)
                 {
-                    firstDigitIndex = index;
-                    secondDigitIndex = index + 1;
-                }
-                else if (batteries[index] > batteries[secondDigitIndex])
-                {
-                    secondDigitIndex = index;
-                }
+                    if (batteries[index] > batteries[digitIndex])
+                    {
+                        digitIndex = index;
+                    }
+                }                
+                return batteries[digitIndex] * (ulong)Math.Pow(10, digits-1) + FindLargestJoltage(batteries[(digitIndex+1)..], digits-1);
             }
-            totalJoltage += batteries[firstDigitIndex] * 10 + batteries[secondDigitIndex];
+
+            List<ulong> batteries = line.Select(ch => (ulong)char.GetNumericValue(ch)).ToList();
+
+            part1_totalJoltage += FindLargestJoltage(batteries, 2);
+            part2_totalJoltage += FindLargestJoltage(batteries, 12);
         });
-        return (totalJoltage, 0);
+        return (part1_totalJoltage, part2_totalJoltage);
     }
 }
