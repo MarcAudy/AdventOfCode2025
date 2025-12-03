@@ -8,11 +8,11 @@ class FileProcessor
         }
     }
 
-    public static void ProcessSegments(string fileName, char separator, Action<string> lineAction)
+    public static void ProcessSegments(string fileName, char separator, Action<string> segmentAction)
     {
-        foreach (string line in File.ReadAllText($"../../../../input/{fileName}.txt").Split(separator))
+        foreach (string segment in File.ReadAllText($"../../../../input/{fileName}.txt").Split(separator))
         {
-            lineAction(line);
+            segmentAction(segment);
         }
     }
 }
