@@ -33,3 +33,4 @@ Thumbs.db
 # Rider / IDE leftovers
 .idea/
 *.sln.iml
+src/ProjectInfo.g.cs

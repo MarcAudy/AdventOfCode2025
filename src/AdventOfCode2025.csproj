@@ -7,4 +7,20 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+ <PropertyGroup>
+  <ProjectInfoContent>
+public static class ProjectInfo
+{
+    public const string ProjectDir = @"$(MSBuildProjectDirectory)\"%3B
+}
+  </ProjectInfoContent>
+</PropertyGroup>
+
+<Target Name="GenerateProjectInfo" BeforeTargets="BeforeBuild">
+  <WriteLinesToFile
+      File="ProjectInfo.g.cs"
+      Lines="$(ProjectInfoContent)"
+      Overwrite="true" />
+</Target>
+
 </Project>

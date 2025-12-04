@@ -2,7 +2,7 @@ class FileProcessor
 {
     public static string[] GetLines(string fileName)
     {
-        return File.ReadAllLines($"../../../../input/{fileName}.txt");
+        return File.ReadAllLines($"{ProjectInfo.ProjectDir}/../input/{fileName}.txt");
     }
 
     public static void ProcessLines(string fileName, Action<string> lineAction)
@@ -21,7 +21,7 @@ class FileProcessor
 
     public static void ProcessSegments(string fileName, char separator, Action<string> segmentAction)
     {
-        foreach (string segment in File.ReadAllText($"../../../../input/{fileName}.txt").Split(separator))
+        foreach (string segment in File.ReadAllText($"{ProjectInfo.ProjectDir}/../input/{fileName}.txt").Split(separator))
         {
             segmentAction(segment);
         }
@@ -29,7 +29,7 @@ class FileProcessor
 
     public static void ParallelProcessSegments(string fileName, char separator, Action<string> segmentAction)
     {
-        string[] segments = File.ReadAllText($"../../../../input/{fileName}.txt").Split(separator);
+        string[] segments = File.ReadAllText($"{ProjectInfo.ProjectDir}/../input/{fileName}.txt").Split(separator);
         Parallel.For(0, segments.Length, index => segmentAction(segments[index]));
     }
 }
