@@ -1,16 +1,16 @@
-class day1
+class Day1
 {
-    public static void run()
+    public static void Run()
     {
-        var exampleResult = evaluate("day1_example");
-        var result = evaluate("day1_input");
+        var exampleResult = Evaluate("day1_example");
+        var result = Evaluate("day1_input");
         Console.WriteLine($"Day1 Part1 Example: {exampleResult.part1}");
         Console.WriteLine($"Day1 Part1: {result.part1}");
         Console.WriteLine($"Day1 Part2 Example: {exampleResult.part2}");
         Console.WriteLine($"Day1 Part2: {result.part2}");
     }
 
-    private static (int part1, int part2)  evaluate(string fileName)
+    private static (int part1, int part2) Evaluate(string fileName)
     {
         int dial = 50;
         int part1_zeroes = 0;
