@@ -6,13 +6,13 @@ class day3
     {
         var exampleResult = evaluate("day3_example");
         var result = evaluate("day3_input");
-        Console.WriteLine($"Day3 Part1 Example: {exampleResult.Item1}");
-        Console.WriteLine($"Day3 Part1: {result.Item1}");
-        Console.WriteLine($"Day3 Part2 Example: {exampleResult.Item2}");
-        Console.WriteLine($"Day3 Part2: {result.Item2}");
+        Console.WriteLine($"Day3 Part1 Example: {exampleResult.part1}");
+        Console.WriteLine($"Day3 Part1: {result.part1}");
+        Console.WriteLine($"Day3 Part2 Example: {exampleResult.part2}");
+        Console.WriteLine($"Day3 Part2: {result.part2}");
     }
 
-    private static (ulong, ulong) evaluate(string fileName)
+    private static (ulong part1, ulong part2) evaluate(string fileName)
     {
         ulong part1_totalJoltage = 0;
         ulong part2_totalJoltage = 0;

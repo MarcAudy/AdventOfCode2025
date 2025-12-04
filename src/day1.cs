@@ -4,13 +4,13 @@ class day1
     {
         var exampleResult = evaluate("day1_example");
         var result = evaluate("day1_input");
-        Console.WriteLine($"Day1 Part1 Example: {exampleResult.Item1}");
-        Console.WriteLine($"Day1 Part1: {result.Item1}");
-        Console.WriteLine($"Day1 Part2 Example: {exampleResult.Item2}");
-        Console.WriteLine($"Day1 Part2: {result.Item2}");
+        Console.WriteLine($"Day1 Part1 Example: {exampleResult.part1}");
+        Console.WriteLine($"Day1 Part1: {result.part1}");
+        Console.WriteLine($"Day1 Part2 Example: {exampleResult.part2}");
+        Console.WriteLine($"Day1 Part2: {result.part2}");
     }
 
-    private static (int, int) evaluate(string fileName)
+    private static (int part1, int part2)  evaluate(string fileName)
     {
         int dial = 50;
         int part1_zeroes = 0;
