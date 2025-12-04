@@ -1,13 +1,19 @@
+using System.Diagnostics;
+
 class Day1
 {
     public static void Run()
     {
+        Stopwatch sw = Stopwatch.StartNew();        
         var exampleResult = Evaluate("day1_example");
         var result = Evaluate("day1_input");
+        sw.Stop();
+
         Console.WriteLine($"Day1 Part1 Example: {exampleResult.part1}");
         Console.WriteLine($"Day1 Part1: {result.part1}");
         Console.WriteLine($"Day1 Part2 Example: {exampleResult.part2}");
         Console.WriteLine($"Day1 Part2: {result.part2}");
+        Console.WriteLine($"Solved Day 1 in {sw.Elapsed.TotalSeconds} seconds");
     }
 
     private static (int part1, int part2) Evaluate(string fileName)
