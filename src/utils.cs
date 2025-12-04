@@ -8,6 +8,11 @@ class FileProcessor
         }
     }
 
+    public static string[] GetLines(string fileName)
+    {
+        return File.ReadAllLines($"../../../../input/{fileName}.txt");
+    }
+
     public static void ProcessSegments(string fileName, char separator, Action<string> segmentAction)
     {
         foreach (string segment in File.ReadAllText($"../../../../input/{fileName}.txt").Split(separator))
