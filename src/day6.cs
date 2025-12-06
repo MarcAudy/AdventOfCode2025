@@ -25,12 +25,10 @@ partial class Day6
         List<ulong>[] cephalopodNumbers = [.. Enumerable.Range(0, operators.Length).Select(_ => new List<ulong>())];
 
         int numSet = 0;
-        int charIndex = 0;
-        int numberLineCount = lines.Length - 1;
-        while (charIndex < lines[0].Length)
+        for (int charIndex = 0; charIndex < lines[0].Length; charIndex++)
         {
             ulong cephalopodNumber = 0;
-            for (int lineIndex = 0; lineIndex < numberLineCount; lineIndex++)
+            for (int lineIndex = 0; lineIndex < lines.Length - 1; lineIndex++)
             {
                 if (lines[lineIndex][charIndex] != ' ')
                 {
@@ -46,7 +44,6 @@ partial class Day6
             {
                 numSet++;
             }
-            charIndex++;
         }
 
         ulong part1_grandTotal = 0;
