@@ -1,5 +1,4 @@
 using System.Diagnostics;
-using System.Text.RegularExpressions;
 
 partial class Day6
 {
@@ -12,41 +11,61 @@ partial class Day6
 
         Console.WriteLine($"Day6 Part1 Example: {exampleResult.part1}");
         Console.WriteLine($"Day6 Part1: {result.part1}");
-        //Console.WriteLine($"Day6 Part2 Example: {exampleResult.part2}");
-        //Console.WriteLine($"Day6 Part2: {result.part2}");
+        Console.WriteLine($"Day6 Part2 Example: {exampleResult.part2}");
+        Console.WriteLine($"Day6 Part2: {result.part2}");
         Console.WriteLine($"Solved Day6 in {sw.Elapsed.TotalSeconds} seconds");
     }
 
     private static (ulong part1, ulong part2) Evaluate(string fileName)
     {
         string[] lines = FileProcessor.GetLines(fileName);
-        ulong[][] numbers = lines[..^1].Select(line => WhiteSpaceSplitRegex().Split(line.Trim()).Select(s => ulong.Parse(s)).ToArray()).ToArray();                                   
-        char[] operators = WhiteSpaceSplitRegex().Split(lines.Last().Trim()).Select(s => s[0]).ToArray();
+        ulong[][] numbers = lines[..^1].Select(line => line.Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(s => ulong.Parse(s)).ToArray()).ToArray();                                   
+        char[] operators = lines.Last().Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(s => s[0]).ToArray();
 
-        ulong grandTotal = 0;
-        for (int n = 0; n < operators.Length; n++)
+        List<ulong>[] cephalopodNumbers = [.. Enumerable.Range(0, operators.Length).Select(_ => new List<ulong>())];
+
+        int numSet = 0;
+        int charIndex = 0;
+        int numberLineCount = lines.Length - 1;
+        while (charIndex < lines[0].Length)
         {
-            if (operators[n] == '+')
+            ulong cephalopodNumber = 0;
+            for (int lineIndex = 0; lineIndex < numberLineCount; lineIndex++)
             {
-                foreach (ulong[] nums in numbers) 
+                if (lines[lineIndex][charIndex] != ' ')
                 {
-                    grandTotal += nums[n];
+                    cephalopodNumber *= 10;
+                    cephalopodNumber += (ulong)char.GetNumericValue(lines[lineIndex][charIndex]);
                 }
+            }
+            if (cephalopodNumber > 0)
+            {
+                cephalopodNumbers[numSet].Add(cephalopodNumber);
             }
             else
             {
-                ulong product = 1;
-                foreach (ulong[] nums in numbers) 
-                {
-                    product *= nums[n];
-                }
-                grandTotal += product;
+                numSet++;
+            }
+            charIndex++;
+        }
+
+        ulong part1_grandTotal = 0;
+        ulong part2_grandTotal = 0;
+        for (int opIndex = 0; opIndex < operators.Length; opIndex++)
+        {
+            if (operators[opIndex] == '+')
+            {
+                part1_grandTotal += numbers.Aggregate((ulong) 0, (sum, nums) => sum + nums[opIndex]);
+                part2_grandTotal += cephalopodNumbers[opIndex].Aggregate((sum, num) => sum + num);
+            }
+            else
+            {
+                part1_grandTotal += numbers.Aggregate((ulong)1, (product, nums) => product * nums[opIndex]);
+                part2_grandTotal += cephalopodNumbers[opIndex].Aggregate((product, num) => product * num);
+
             }
         }
 
-        return (grandTotal, 0);
+        return (part1_grandTotal, part2_grandTotal);
     }
-
-    [GeneratedRegex(@"\s+")]
-    private static partial Regex WhiteSpaceSplitRegex();
 }
