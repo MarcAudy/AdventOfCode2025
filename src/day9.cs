@@ -1,9 +1,8 @@
 using System.Collections.Concurrent;
 using System.Diagnostics;
 
-partial class Day9
+class Day9
 {
-    
     public static void Run()
     {
         Stopwatch sw = Stopwatch.StartNew();        

@@ -12,9 +12,8 @@ class JunctionBoxDistanceComparer : IComparer<JunctionBoxDistance>
     }
 }
 
-partial class Day8
+class Day8
 {
-    
     public static void Run()
     {
         Stopwatch sw = Stopwatch.StartNew();        

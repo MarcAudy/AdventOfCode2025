@@ -1,6 +1,6 @@
 using System.Diagnostics;
 
-partial class Day6
+class Day6
 {
     public static void Run()
     {
