@@ -43,6 +43,7 @@ partial class Day10
                 }
                 if (!seenPatterns.Contains(newPattern))
                 {
+                    seenPatterns.Add(newPattern);
                     foreach (uint button in buttons) 
                     {
                         buttonsToPress.Enqueue((newPattern, button, nextCount));
