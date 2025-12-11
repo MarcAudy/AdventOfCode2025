@@ -16,11 +16,12 @@ public static class ProjectInfo
   </ProjectInfoContent>
 </PropertyGroup>
 
+ <ItemGroup>
+   <PackageReference Include="Google.OrTools" Version="9.14.6206" />
+ </ItemGroup>
+
 <Target Name="GenerateProjectInfo" BeforeTargets="BeforeBuild">
-  <WriteLinesToFile
-      File="ProjectInfo.g.cs"
-      Lines="$(ProjectInfoContent)"
-      Overwrite="true" />
+  <WriteLinesToFile File="ProjectInfo.g.cs" Lines="$(ProjectInfoContent)" Overwrite="true" />
 </Target>
 
 </Project>
